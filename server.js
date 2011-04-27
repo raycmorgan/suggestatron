@@ -53,7 +53,6 @@ phone.setup(function () {
       console.log('Received incoming SMS with text: ' + reqParams.Body);
       console.log('From: ' + reqParams.From);
       
-      
       APP.redisClient.incr('ids:ideas', function (err, id) {
         APP.redisClient.sadd('ideas:ids', id);
         APP.redisClient.hmset('ideas:' + id, 'idea', reqParams.Body, 'phone', reqParams.From, 'id', id);
