@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-1.5.2.min.js" type="text/javascript"></script>
+    
+    <style type="text/css">
+      body {background:#111; font:normal 22px Helvetica,sans-serif; text-shadow:1px 1px 1px #666;}
+      h2 {-webkit-transition:all .5s ease-in-out; position:absolute; top:-100px; left:-100px; margin:0; padding:0; text-align:center; width:400px; color:#fff;}
+      
+      /h2.pos0 {top:10%; left:45%;}
+      /h2.pos0 {top:100px; left:75px;}
+      /h2.pos1 {left:20%; top:60%;}
+      /h2.pos2 {left:60%; top:40%;}
+      
+      body {width:100%; height:100%; overflow:hidden;}
+    </style>
+  </head>
+
+  <body>
+    <div id="wrap"></div>
+    
+    <script type="text/javascript">
+      
+      shuffle();
+      setInterval(shuffle, 5000);
+      
+      function shuffle() {
+        $.getJSON('/ideas/random/3', function (ideas) {
+          document.getElementById('wrap').className = 'num' + ideas.length;
+          
+          $('h2').each(function (i, el) {
+            el.style.left = window.innerWidth + 500 + 'px';
+            el.style.top = window.innerHeight + 100 + 'px';
+            setTimeout(function () {
+              $(el).remove();
+            }, 1000);
+          });
+        
+          ideas.forEach(function (idea, i) {
+            var h = document.createElement('h2');
+            h.appendChild(document.createTextNode(idea.idea));
+            h.className = '';
+            h.style.left = '-100px';
+            h.style.top = '-100px';
+          
+            document.getElementById('wrap').appendChild(h);
+          
+            var maxWidth = window.innerWidth;
+            var maxHeight = window.innerHeight;
+          
+            setTimeout(function () {
+              h.style.left = (~~(Math.random() * Math.max(maxWidth-410, 0))) + 'px';
+              h.style.top = (~~(Math.random() * Math.max(maxHeight-100, 0))) + 'px';
+            });
+          });
+        });
+      }
+    </script>
+  </body>
+</html>

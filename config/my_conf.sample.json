@@ -1,0 +1,8 @@
+{
+  "twilio": {
+    "SID": "xxxxxxxxxxx",
+    "authToken": "xxxxxxxxxxx",
+    "domain": "______",
+    "phoneNumber": "+xxxxxxxxx"
+  }
+}
